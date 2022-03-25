@@ -56,11 +56,25 @@ streets.addTo(map);
 // Accessing the airport GeoJSON URL
 let airportData = "https://raw.githubusercontent.com/KdotGhai/Mapping_Earthquakes/main/majorAirports.json";
 
+
 // Grabbing our GeoJSON data.
-d3.json(airportData).then(function(data) {
+/* d3.json(airportData).then(function(data) {
   console.log(data);
 // Creating a GeoJSON layer with the retrieved data.
 L.geoJSON(data).addTo(map);
 });
+ */
 
+  //*** Skill Drill: take above d3.json ocde and bindpopup to it
 
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+  console.log(data);
+// Creating a GeoJSON layer with the retrieved data.
+L.geoJson(data, {
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<h1>Airport Code: ${feature.properties.faa}</h1> <hr> <h3>Airport Name: ${feature.properties.name}</h3>`)
+  }
+})
+.addTo(map);
+});
