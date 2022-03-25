@@ -64,3 +64,16 @@ L.geoJSON(data).addTo(map);
 });
 
 
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+  console.log(data);
+// Creating a GeoJSON layer with the retrieved data.
+L.geoJson(data, {
+  onEachFeature: function (feature, layer) {
+    layer.bindPopup(`<h1>Airport Code: ${feature.properties.faa}</h1> <hr> <h3>Airport Name: ${feature.properties.name}</h3>`)
+  }
+})
+.addTo(map);
+});
+    /****we nest the L.geoJson() within d3.json().then(function){} and use onEAchFeature to assign popup but
+     to assign markers we will use POINTTOLAYER callback function earlier and nested in the code*/
