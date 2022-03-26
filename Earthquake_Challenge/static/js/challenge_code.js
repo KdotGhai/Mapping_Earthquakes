@@ -25,7 +25,7 @@ let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/dark-v10/tiles/{
 // Create the map object with center, zoom level and default layer.
 let map = L.map('mapid', {
 	center: [40.7, -94.5],
-	zoom: 3,
+	zoom: 4,
 	layers: [streets]
 });
 
