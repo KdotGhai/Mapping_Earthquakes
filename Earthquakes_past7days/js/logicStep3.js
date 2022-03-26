@@ -50,14 +50,34 @@ d3.json(Earthquakes).then(function(data) {
         }
         return magnitude * 4;
     }
+
+    // This function determines the color of the circle based on the magnitude of the earthquake.
+    function getColor(magnitude) {
+        if (magnitude > 5) {
+        return "#ea2c2c";
+        }
+        if (magnitude > 4) {
+        return "#ea822c";
+        }
+        if (magnitude > 3) {
+        return "#ee9c00";
+        }
+        if (magnitude > 2) {
+        return "#eecc00";
+        }
+        if (magnitude > 1) {
+        return "#d4ee00";
+        }
+        return "#98ee00";
+    }
     // This function returns the style data for each of the earthquakes we plot on
     // the map. We pass the magnitude of the earthquake into a function
     // to calculate the radius.
     function styleInfo(feature) {
         return {
-        opacity: 90,
+        opacity: 1,
         fillOpacity: 1,
-        fillColor: "#ffae42",
+        fillColor: getColor(feature.properties.mag),
         color: "#000000",
         radius: getRadius(feature.properties.mag),
         stroke: true,
@@ -69,10 +89,15 @@ d3.json(Earthquakes).then(function(data) {
     L.geoJson(data, {
         // We turn each feature into a circleMarker on the map.
         pointToLayer: function(feature, latlng) {
-                console.log(data);
-                return L.circleMarker(latlng);
+            console.log(data);
+            return L.circleMarker(latlng);
             },
           // We set the style for each circleMarker using our styleInfo function.
-            style: styleInfo
+            style: styleInfo,
+            // We create a popup for each circleMarker to display the magnitude and
+            //  location of the earthquake after the marker has been created and styled.
+            onEachFeature: function(feature, layer) {//***Adds popup info AFTER "pointToLayer" assigns markers from json data
+            layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+          }
         }).addTo(map);
 });
