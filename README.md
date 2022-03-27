@@ -7,7 +7,7 @@
 ## Results
 &nbsp;&nbsp;&nbsp;&nbsp;Each earthquake is visually represented by a circle and color, where a higher magnitude will have a larger diameter and will be darker in color. In addition, each earthquake has a popup marker that, when clicked, shows the magnitude of the earthquake and the location of the earthquake. The map has three views:
 -	#### Street View <br>
-
+![Street](images/Street - Copy.png)
  	
 -	#### Satellite View <br>
   ![Satellite](images/Satellite.png)
